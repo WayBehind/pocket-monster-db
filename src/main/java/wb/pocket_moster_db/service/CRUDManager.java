@@ -19,15 +19,18 @@ public class CRUDManager {
         while (true) {
             System.out.println("1. List all monsters.");
             System.out.println("2. List all trainers.");
-            System.out.println("3. Create new monster.");
-            System.out.println("4. Create new trainers.");
-            System.out.println("5. Exit");
-            // TODO: following comments
-            /*System.out.println("Update monster.");
-            System.out.println("Update trainer.");
-            System.out.println("Delete monster.");
-            System.out.println("Delete trainer.");
-            System.out.println("A trainer catches a monster.");
+            System.out.println("3. Show specific monster.");
+            System.out.println("4. Show specific trainer.");
+            System.out.println("5. Create new monster.");
+            System.out.println("6. Create new trainers.");
+            System.out.println("7. Edit monster.");
+            System.out.println("8. Edit trainers.");
+            System.out.println("9. Delete monster.");
+            System.out.println("10. Delete trainer.");
+            System.out.println("11. Exit");
+
+            // TODO: implement methods to enable following options
+            /*System.out.println("A trainer catches a monster.");
             System.out.println("A monster is released into wilderness.");
             System.out.println("List monsters owned by a trainer.");
             System.out.println("List trainers by amount of monsters owned.");
@@ -38,13 +41,35 @@ public class CRUDManager {
                 case 1 -> dbMonsterService.printAllMonsters();
                 case 2 -> dbTrainerService.printAllTrainers();
                 case 3 -> createMonster();
-                case 4 -> createTrainer();
-                case 5 -> {
+                case 4 -> printThisMonster();
+                case 5 -> printThisTrainer();
+                case 6 -> createTrainer();
+                case 7 -> editMonster();
+                case 8 -> editTrainer();
+                case 9 -> removeMonster();
+                case 10 -> removeTrainer();
+                case 11 -> {
                     return;
                 }
                 default -> System.out.println("Invalid choice!");
             }
         }
+    }
+
+    // TODO: Errors if id not found
+
+    private void printThisMonster() {
+        System.out.println("ID of monster you want to see: ");
+        final int monsterId = InputUtils.readInt();
+
+        dbMonsterService.printMonster(monsterId);
+    }
+
+    private void printThisTrainer() {
+        System.out.println("ID of trainer you want to see: ");
+        final int trainerId = InputUtils.readInt();
+
+        dbTrainerService.printTrainer(trainerId);
     }
 
     private void createMonster() {
@@ -70,5 +95,33 @@ public class CRUDManager {
         } else {
             System.out.println("Trainer could not be created.");
         }
+    }
+
+    private void editMonster() {
+        System.out.println("ID of monster you want to edit: ");
+        final int monsterId = InputUtils.readInt();
+        System.out.println("Edit monster name: ");
+        final String monsterName = InputUtils.readString();
+        System.out.println("Edit monster's trainer ID: ");
+        final int monsterTrainerId = InputUtils.readInt();
+
+        dbMonsterService.updateMonster(monsterId, monsterName, monsterTrainerId);
+    }
+
+    private void editTrainer() {
+        System.out.println("ID of trainer you want to edit: ");
+        final int trainerId = InputUtils.readInt();
+        System.out.println("Edit trainer name: ");
+        final String trainerName = InputUtils.readString();
+
+        dbTrainerService.updateTrainer(trainerName, trainerId);
+    }
+
+    private void removeMonster() {
+
+    }
+
+    private void removeTrainer() {
+
     }
 }

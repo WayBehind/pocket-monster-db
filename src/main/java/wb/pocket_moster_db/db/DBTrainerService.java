@@ -38,11 +38,12 @@ public class DBTrainerService {
 
     // U
     public void updateTrainer(String name, int trainerId) {
-        final String update = "UPDATE trainer SET name = ?";
+        final String update = "UPDATE trainer SET name = ?  WHERE id = ?";
 
         try (Connection connection = HikariDBSource.getConnection()) {
             final PreparedStatement preparedStatement = connection.prepareStatement(update);
             preparedStatement.setString(1, name);
+            preparedStatement.setInt(2, trainerId);
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

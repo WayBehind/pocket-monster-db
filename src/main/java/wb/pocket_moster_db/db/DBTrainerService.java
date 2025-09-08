@@ -37,34 +37,36 @@ public class DBTrainerService {
     }
 
     // U
-    public void updateTrainer(String name, int trainerId) {
+    public int updateTrainer(String name, int trainerId) {
         final String update = "UPDATE trainer SET name = ?  WHERE id = ?";
 
         try (Connection connection = HikariDBSource.getConnection()) {
             final PreparedStatement preparedStatement = connection.prepareStatement(update);
             preparedStatement.setString(1, name);
             preparedStatement.setInt(2, trainerId);
-            preparedStatement.executeUpdate();
+            return preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
+            return 0;
         }
     }
 
     // D
-    public void deleteTrainer(int id) {
+    public int deleteTrainer(int id) {
         final String delete = "DELETE FROM trainer WHERE id = ?";
 
         try (Connection connection = HikariDBSource.getConnection()) {
             final PreparedStatement preparedStatement = connection.prepareStatement(delete);
             preparedStatement.setInt(1, id);
-            preparedStatement.executeUpdate();
+            return preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
+            return 0;
         }
     }
 
     // Print all trainers
-    public void printAllTrainers() {
+    public void listAllTrainers() {
         final String query = "SELECT * FROM trainer";
 
         try (Connection connection = HikariDBSource.getConnection()) {

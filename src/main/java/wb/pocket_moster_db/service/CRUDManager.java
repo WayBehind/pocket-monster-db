@@ -4,8 +4,6 @@ import wb.pocket_moster_db.db.DBMonsterService;
 import wb.pocket_moster_db.db.DBTrainerService;
 import wb.pocket_moster_db.utility.InputUtils;
 
-import java.security.spec.RSAOtherPrimeInfo;
-
 public class CRUDManager {
 
     private final DBTrainerService dbTrainerService;
